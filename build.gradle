@@ -2,6 +2,7 @@ buildscript {
   ext {
     spring_boot_version = '2.1.4.RELEASE'
     spring_boot_gradle_plugin_version = '2.1.4.RELEASE'
+    h2_version = '1.4.199'
     slf4j_version = '1.7.12'
     logback_version = '1.1.3'
     testng_version = '6.14.3'
@@ -27,11 +28,17 @@ wrapper {
 }
 
 dependencies {
+  compile "org.springframework.boot:spring-boot-starter-data-rest:$spring_boot_version"
+  compile "org.springframework.boot:spring-boot-starter-data-jpa:$spring_boot_version"
+  compile "com.h2database:h2:$h2_version"
+
   compile "org.slf4j:slf4j-api:$slf4j_version"
 
   runtime "ch.qos.logback:logback-classic:$logback_version"
 
   // Test dependencies
   testCompile "org.testng:testng:$testng_version"
+  testCompile "org.springframework.boot:spring-boot-starter-test:$spring_boot_version"
 }
+
 
