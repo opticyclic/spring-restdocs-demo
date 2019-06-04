@@ -1,0 +1,33 @@
+= Spring REST Docs Demo API
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toc-title: Index
+:toclevels: 4
+:sectlinks:
+
+== Introduction
+
+The Stock API is a _simple_ demo that simulates stock prices.
+
+== Stocks API
+Collection of API endpoints used to manipulate stocks registered in the application.
+
+=== Get A Stock By Id
+Get a specific stock stored by id.
+
+==== Path Parameters
+include::{snippets}/stocks/get-by-id/path-parameters.adoc[]
+
+==== Response Fields
+include::{snippets}/stocks/get-by-id/response-fields.adoc[]
+
+==== Sample Request
+include::{snippets}/stocks/get-by-id/http-request.adoc[]
+
+==== Sample Response
+include::{snippets}/stocks/get-by-id/http-response.adoc[]
+
+==== CURL sample
+include::{snippets}/stocks/get-by-id/curl-request.adoc[]

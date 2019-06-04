@@ -6,19 +6,27 @@ buildscript {
     slf4j_version = '1.7.12'
     logback_version = '1.1.3'
     testng_version = '6.14.3'
+    spring_restdocs_version = '2.0.3.RELEASE'
+    asciidoctor_version = '1.5.3'
+    snippetsDir = file('build/generated-snippets')
   }
 
   repositories {
     mavenCentral()
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
   }
 
   dependencies {
     classpath "org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_gradle_plugin_version"
+    classpath "org.asciidoctor:asciidoctor-gradle-plugin:$asciidoctor_version"
   }
 }
 
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'org.asciidoctor.convert'
 
 repositories {
   mavenCentral()
@@ -41,9 +49,17 @@ dependencies {
 
   // Test dependencies
   testCompile "org.testng:testng:$testng_version"
-  testCompile "org.springframework.boot:spring-boot-starter-test:$spring_boot_version"
+  testCompile ("org.springframework.boot:spring-boot-starter-test:$spring_boot_version") {
+    exclude group: 'junit', module: 'junit;'
+  }
+  testCompile "org.springframework.restdocs:spring-restdocs-mockmvc:$spring_restdocs_version"
+  asciidoctor "org.springframework.restdocs:spring-restdocs-asciidoctor:$spring_restdocs_version"
 }
 
+test {
+  useTestNG()
+  outputs.dir snippetsDir
+}
 
 asciidoctor {
   inputs.dir snippetsDir
